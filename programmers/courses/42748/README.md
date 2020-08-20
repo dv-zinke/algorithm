@@ -44,14 +44,15 @@ commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 
 ## 풀이
 
 ```javascript 
-  if(commands.length !== commands.filter(command => command.length === 3).length) return;
   return commands
       .map(command =>
+        // 배열의 command 시작 자리수와 K번째수를 찾기위해 command의 숫자를 -1 시켜줌
           command.map(num => {
             return num - 1;
           })
       )
       .map(command => {
+        //받은 배열의 첫번째자리수에서 끝의자리수까지 자린뒤 숫자대로 정렬한 배열의 자리수를 가져옴
         return array.slice(command[0], command[1]+1).sort((a,b)=>a-b)[[command[2]]]
       });
 ```    
@@ -59,7 +60,6 @@ commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 
 ## 잡담 및 해설 
 
 ```javascript 
-  if(commands.length !== commands.filter(command => command.length === 3).length) return;
   return commands
       .map(command =>
           command.map(num => {
@@ -76,5 +76,11 @@ commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 
 > 그래서 숫자의 크기대로 정렬되게 sort 를 바꿔주니 잘작동하였다
 > 
 - 배열순서를 불러오는건 0,1,2,3 식인데 자리수로 이야기하니깐 헷갈려서 실수를 많이했다.
-- command[0], command[1] 이런식보단 명시적으로 적어주는게 좋을것 같다. 
+- command[0], command[1] 이런식보단 명시적으로 적어주는게 좋을것 같다.
+```javascript
+if(commands.length !== commands.filter(command => command.length === 3).length) return;
+``` 
+- 2번째 케이스실패 원인이 commands 의 길이 인줄 알고 command 배열의 길이가 3개가 아닌것이 있으면 return 하라고 
+  조건도 걸어주었다
+   
 </details>    
